@@ -27,163 +27,159 @@ lista = list(precios_frutas.keys())
 
 #Ejercicio 4)
 
-class Persona:
-    def __init__(nombre, pais, edad):
-        print(f"¡Hola! Soy {nombre}, vivo en {pais} y tengo {edad} años")
+def contactos():
+    contactos = {}
+
+    while True:
+        opcion = int(input("Bienvenidx a tus contactos.\nElije la opción deseada: 1- Ingresar nuevo contacto, 2- Buscar contacto, 3- Salir "))
+        
+        if opcion == 1:
+            if len(contactos) <= 5:
+                nombre = input("Ingresa el nombre del contacto nuevo ")
+                numero = input("Ingresa el número del contacto nuevo ")
+                contactos[nombre] = numero
+            else:
+                print("Ya tienes 5 contactos guardados.")
+        elif opcion == 2:
+            if contactos:
+                nombreBuscado = input("Ingresa el contacto a buscar ")
+                if nombreBuscado in contactos:    
+                    print(contactos[nombreBuscado])
+                else:
+                    print("Contacto no encontrado.")
+            else:
+                print("No hay contactos.")
+        elif opcion == 3:
+            break
+        else:
+            print("Opción inválida")
+
+contactos()
 
 #Ejercicio 5)
 
-import math
+frase = input("Ingresa una frase ")
 
-class Circulo:
-    def __init__(self, radio):
-        self.radio = radio
-    
-    def calcular_area(self):
-        return math.pi * (self.radio ** 2)
+palabras = frase.split()
+palabrasUnicas = set(palabras)
 
-    def calcular_perimetro(self):
-        return math.pi * self.radio * 2
+frecuencia = {}
+
+for palabra in palabras:
+    palabra = palabra.lower()
+    frecuencia[palabra] = frecuencia.get(palabra, 0) + 1
+
+for palabra, cantidad in frecuencia.items():
+    print(f"{palabra}: {cantidad}")
 
 #Ejercicio 6)
 
-def balanceado(string):
-    pila = []
-    pares = {
-        ")": "(",
-        "}": "{",
-        "]": "["
-    }
+def alumnos():
+    alumnos = {}
 
-    for caracter in string:
-        if caracter in "([{":
-            pila.append(caracter)
-        elif caracter in ")]}":
-            if not pila or pila[-1] != pares[caracter]:
-                return False
-            pila.pop()
-    return not pila
+    while True:
+        opcion = int(input("Ingresa la opción deseada: 1- Agregar alumno, 2- Calcular promedio, 3- Salir "))
 
-string1 = "([{}])"
-string2 = "()[]{}"
-string3 = "{](})["
-
-print(balanceado(string1))
-print(balanceado(string2))
-print(balanceado(string3))
+        if opcion == 1:
+            nombre = input("Ingresa el nombre del alumno: ")
+            nota1 = int(input("Ingresa la primer nota: "))
+            nota2 = int(input("Ingresa la segunda nota: "))
+            nota3 = int(input("Ingresa la tercer nota: "))
+            notas =  nota1, nota2, nota3
+            alumnos[nombre] = tuple(notas)
+        elif opcion == 2:
+            nombreBuscado = input("Ingresa el nombre del alumno a buscar: ")
+            if nombreBuscado in alumnos:
+                print(f"Promedio: {sum(alumnos[nombreBuscado]) / 3}")
+            else:
+                print("Alumno no encontrado.")
+        elif opcion == 3:
+            break
+        else:
+            print("Opción inválida.")
+    
+alumnos()
 
 #Ejercicio 7)
 
-class Cola:
-    def __init__(self):
-        self.cola = []
-    
-    def encolar(self, cliente):
-        self.cola.append(cliente)
-        print(f"{cliente} agregado a la cola.")
-    
-    def desencolar(self):
-        if self.cola:
-            atendido = self.cola.pop(0)
-            print(f"Cliente atendido: {atendido}.")
-            return atendido
-        else:
-            print("No hay clientes en la cola.")
-            return None
+aprobadosParcial1 = {1, 3, 5, 7, 9, 4}
+aprobadosParcial2 = {2, 4, 6, 8, 10, 5}
 
-    def mostrar_siguiente(self):
-        if self.cola:
-            print(f"El próximo cliente es: {self.cola[0]}.")
-            return self.cola[0]
-        else:
-            print("No hay clientes en la cola.")
-            return None
-
-cola = Cola()
-cola.encolar("Pablo")
-cola.encolar("Ian")
-cola.desencolar()
-cola.mostrar_siguiente()
+print("Aprobaron ambos parciales:")
+print(aprobadosParcial1 & aprobadosParcial2)
+print("Aprobaron solo uno de los dos parciales:")
+print(aprobadosParcial1 ^ aprobadosParcial2)
+print("Aprobaron al menos un parcial:")
+print(aprobadosParcial1 | aprobadosParcial2)
 
 #Ejercicio 8)
 
-class Nodo():
-    def __init__(self, valor):
-        self.valor = valor
-        self.siguiente = None
-    
-class ListaEnlazada():
-    def __init__(self):
-        self.cabeza = None
+def stock():
+    stock = {
+        "manzana": 10,
+        "papa": 9,
+        "zanahoria": 7,
+        "miel": 12
+    }
 
-    def insertar(self, valor):
-        nuevo_nodo = Nodo(valor)
-        nuevo_nodo.siguiente = self.cabeza
-        self.cabeza = nuevo_nodo
-        print(f"{valor} insertado al inicio.")
 
-    def mostrar_lista(self):
-        actual = self.cabeza
-        if not actual:
-            print("La lista no contiene elementos.")
-            return
-        while actual:
-            print(actual.valor, end = " -> ")
-            actual = actual.siguiente
-        print("None")
+    while True:
+        opcion = int(input("Ingresa la opción deseada: 1- Consultar stock, 2- Agregar unidades, 3- Agregar producto, 4- Mostrar stock actual, 5- Salir "))
+        
+        if opcion == 1:
+            nombreBuscado = input("Ingresa el nombre del producto a buscar: ").lower()
+            if nombreBuscado in stock:
+                print(f"{nombreBuscado}: {stock[nombreBuscado]}")
+            else:
+                print("Producto no encontrado.")
+        elif opcion == 2:
+            nombreBuscado = input("Ingresa el nombre del producto a buscar: ").lower()
+            if nombreBuscado in stock:
+                unidades = int(input("Ingresa la cantidad de unidades a agregar: "))
+                stock[nombreBuscado] += unidades
+                print(f"{nombreBuscado}: {stock[nombreBuscado]}")
+            else:
+                print("Producto no encontrado.")
+        elif opcion == 3:
+            nombreAgregar = input("Ingresa el nombre del producto a agregar: ")
+            unidades = int(input("Ingresa la cantidad de unidades del producto nuevo: "))
+            stock[nombreAgregar] = unidades
+        elif opcion == 4:
+            print(stock)
+        elif opcion == 5:
+            break
+        else:
+            print("Opción inválida.")
 
-lista = ListaEnlazada()
-
-lista.insertar(1)
-lista.insertar(2)
-lista.mostrar_lista()
+stock()
 
 #Ejercicio 9)
 
-class Nodo():
-    def __init__(self, valor):
-        self.valor = valor
-        self.siguiente = None
-    
-class ListaEnlazada2():
-    def __init__(self):
-        self.cabeza = None
+agenda = {
+    ("lunes", "10:00"): "Reunión",
+    ("martes", "15:00"): "Clase de inglés",
+    ("miercoles", "12:00"): "Almuerzo con mamá",
+    ("jueves", "16:30"): "Fútbol",
+    ("viernes", "21:00"): "Cita con Juan",
+    ("sabado", "14:40"): "Llevar a Laura al médico",
+    ("domingo", "09:45"): "Dormir"
+}
 
-    def insertar(self, valor):
-        nuevo_nodo = Nodo(valor)
-        nuevo_nodo.siguiente = self.cabeza
-        self.cabeza = nuevo_nodo
-        print(f"{valor} insertado al inicio.")
+dia = input("Qué día quieres consultar? ")
+hora = input("Qué hora quieres consultar?(formato XX:XX) ")
 
-    def mostrar_lista(self):
-        actual = self.cabeza
-        if not actual:
-            print("La lista no contiene elementos.")
-            return
-        while actual:
-            print(actual.valor, end = " -> ")
-            actual = actual.siguiente
-        print("None")
-    
-    def invertir(self):
-        anterior = None
-        actual = self.cabeza
+if (dia, hora) in agenda:
+    print(f"El día {dia} a las {hora}hs tienes {agenda[dia, hora]}")
+else:
+    print("No tienes nada ese día en ese horario.")
 
-        while actual:
-            siguiente = actual.siguiente
-            actual.siguiente = anterior
-            anterior = actual
-            actual = siguiente
-        
-        self.cabeza = anterior
+#Ejercicio 10)
 
-lista2 = ListaEnlazada2()
+original = {
+    "Argentina": "Buenos Aires",
+    "Chile": "Santiago"
+}
+invertido = {valor: clave for clave, valor in original.items()}
 
-lista2.insertar(11)
-lista2.insertar(22)
-print("Lista original:")
-lista2.mostrar_lista()
-
-lista2.invertir()
-print("Lista invertida:")
-lista2.mostrar_lista()
+print(f"Original: {original}")
+print(f"Invertido: {invertido}")
